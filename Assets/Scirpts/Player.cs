@@ -17,6 +17,31 @@ public class Player : MonoBehaviour
 
     private bool isWalking;
 
+    private void Start()
+    {
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
+    }
+
+    private void GameInput_OnInteractAction(object sender, System.EventArgs e)
+    {
+        moveDir = new Vector3(gameInput.GetMovementVectorNormalized().x, 0
+            , gameInput.GetMovementVectorNormalized().y);
+
+        if (moveDir != Vector3.zero)
+        {
+            lastInteracDir = moveDir;
+        }
+
+        if (Physics.Raycast(transform.position, lastInteracDir, out RaycastHit raycast
+            , interactionDistance, counterLayerMask))
+        {
+            if (raycast.transform.TryGetComponent(out ClearCounter clearCounter))
+            {
+                clearCounter.Interact();
+            }
+        }
+    }
+
     private void Update()
     {
         HandleMovement();
@@ -85,7 +110,7 @@ public class Player : MonoBehaviour
         {
             if(raycast.transform.TryGetComponent(out ClearCounter clearCounter))
             {
-                clearCounter.Interact();
+                //clearCounter.Interact();
             }
         }
     }
