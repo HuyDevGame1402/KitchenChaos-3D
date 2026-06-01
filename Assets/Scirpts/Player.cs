@@ -6,21 +6,33 @@ public class Player : MonoBehaviour
     private float rotateSpeed = 10f;
     private float playerRadius = .7f;
     private float playerHeight = 2f;
+    private float interactionDistance = 2f;
+    private Vector3 lastInteracDir;
     private Vector3 moverDirX = new Vector3(0, 0, 0);
     private Vector3 moverDirZ = new Vector3(0, 0, 0);
     private bool canMove = true;
     private Vector3 moveDir;
     [SerializeField] private GameInput gameInput;
+    [SerializeField] private LayerMask counterLayerMask;
 
     private bool isWalking;
 
     private void Update()
     {
+        HandleMovement();
+        HandleInteractions();
+    }
+    public bool IsWalking()
+    {
+        return isWalking;
+    }
+    private void HandleMovement()
+    {
         moveDir = new Vector3(gameInput.GetMovementVectorNormalized().x, 0
             , gameInput.GetMovementVectorNormalized().y);
 
         canMove = !Physics.CapsuleCast(transform.position,
-            transform.position + Vector3.up * playerHeight, playerRadius, 
+            transform.position + Vector3.up * playerHeight, playerRadius,
             moveDir, moveSpeed * Time.deltaTime);
 
         if (!canMove)
@@ -57,8 +69,24 @@ public class Player : MonoBehaviour
         isWalking = gameInput.GetMovementVectorNormalized().magnitude > 0;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime);
     }
-    public bool IsWalking()
+
+    private void HandleInteractions()
     {
-        return isWalking;
+        moveDir = new Vector3(gameInput.GetMovementVectorNormalized().x, 0
+            , gameInput.GetMovementVectorNormalized().y);
+        
+        if(moveDir != Vector3.zero)
+        {
+            lastInteracDir = moveDir;
+        }
+
+        if(Physics.Raycast(transform.position, lastInteracDir, out RaycastHit raycast
+            , interactionDistance, counterLayerMask))
+        {
+            if(raycast.transform.TryGetComponent(out ClearCounter clearCounter))
+            {
+                clearCounter.Interact();
+            }
+        }
     }
 }
