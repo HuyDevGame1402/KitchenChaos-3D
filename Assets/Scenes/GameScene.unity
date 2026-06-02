@@ -787,11 +787,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7257132244335603603, guid: d781813f7601e3c4ab475e556b9d50a5,
+        type: 3}
+      propertyPath: kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 62279db423e958145898e37ef2fa59cd,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d781813f7601e3c4ab475e556b9d50a5, type: 3}
+--- !u!114 &1430001892 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7257132244335603603, guid: d781813f7601e3c4ab475e556b9d50a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1430001891}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf1acd9e44c16044ea18552308df7f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1790603021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,6 +1076,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 7257132244335603603, guid: d781813f7601e3c4ab475e556b9d50a5,
+        type: 3}
+      propertyPath: kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 408b78eab299e4d4bbe0da02e6109352,
+        type: 2}
+    - target: {fileID: 7257132244335603603, guid: d781813f7601e3c4ab475e556b9d50a5,
+        type: 3}
+      propertyPath: secondClearCounter
+      value: 
+      objectReference: {fileID: 1430001892}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
