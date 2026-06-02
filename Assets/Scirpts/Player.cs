@@ -1,12 +1,12 @@
 using UnityEngine;
 using System;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IKitchenObjectParent
 {
     public static Player Instance { get; private set; }
 
     private float moveSpeed = 7f;
-    private float rotateSpeed = 10f;
+    private float rotateSpeed = 30f;
     private float playerRadius = .7f;
     private float playerHeight = 2f;
     private float interactionDistance = 2f;
@@ -27,6 +27,10 @@ public class Player : MonoBehaviour
         public ClearCounter selectedCounter;
     }
 
+    [Header("Kitchen Object")]
+    private KitChenObject kitchenObject;
+    [SerializeField] private Transform KitchenObjectHoldPoint;
+
     private void Awake()
     {
         Instance = this;
@@ -39,7 +43,7 @@ public class Player : MonoBehaviour
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
     {
-        if(selectedCounter != null) selectedCounter.Interact();
+        if(selectedCounter != null) selectedCounter.Interact(this);
     }
 
     private void Update()
@@ -135,4 +139,16 @@ public class Player : MonoBehaviour
                             selectedCounter = selectedCounter
                         });
     }
+
+    public Transform GetKitchenObjectFollowTransform()
+    {
+        return KitchenObjectHoldPoint;
+    }
+    public void SetKitchenObject(KitChenObject kitchenObject)
+    {
+        this.kitchenObject = kitchenObject;
+    }
+    public KitChenObject GetKitchenObject() => kitchenObject;
+    public void ClearKitchenObject() => kitchenObject = null;
+    public bool HasKitchenObject() => kitchenObject != null;
 }
