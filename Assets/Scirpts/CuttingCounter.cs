@@ -3,14 +3,18 @@ using UnityEngine;
 
 public class CuttingCounter : BaseCounter
 {
-    [SerializeField] private KitChenObjectSO cutKitchenObjectSO;
+    [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArray;
     public override void Interact(Player player)
     {
         if (!HasKitchenObject())
         {
             if (player.HasKitchenObject())
             {
-                player.GetKitchenObject().SetKitchenObjectParent(this);
+                if(HasRecipeWithInput(player.GetKitchenObject()
+                    .GetKitChenObjectSO()))
+                {
+                    player.GetKitchenObject().SetKitchenObjectParent(this);
+                }
             }
         }
         else
@@ -27,10 +31,35 @@ public class CuttingCounter : BaseCounter
     }
     public override void InteractAlternate(Player player)
     {
-        if (HasKitchenObject())
+        if (HasKitchenObject() && HasRecipeWithInput(
+            GetKitchenObject().GetKitChenObjectSO()))
         {
+            KitChenObjectSO outputKitchenObjectSO = GetOutputForInput(
+                GetKitchenObject().GetKitChenObjectSO());
             GetKitchenObject().DestroySelf();
-            KitChenObject.SpawnKitchenObject(cutKitchenObjectSO, this);
+            KitChenObject.SpawnKitchenObject(outputKitchenObjectSO, this);
         }
+    }
+    private bool HasRecipeWithInput(KitChenObjectSO inputKitchenObjectSO)
+    {
+        foreach (CuttingRecipeSO cuttingRecipeSO in cuttingRecipeSOArray)
+        {
+            if (cuttingRecipeSO.input == inputKitchenObjectSO)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    private KitChenObjectSO GetOutputForInput(KitChenObjectSO inputKitchenObjectSO)
+    {
+        foreach(CuttingRecipeSO cuttingRecipeSO in cuttingRecipeSOArray)
+        {
+            if(cuttingRecipeSO.input == inputKitchenObjectSO)
+            {
+                return cuttingRecipeSO.output;
+            }
+        }
+        return null;
     }
 }
