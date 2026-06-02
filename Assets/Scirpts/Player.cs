@@ -12,7 +12,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     private float interactionDistance = 2f;
     private Vector3 lastInteracDir;
     private Vector3 moverDirX = new Vector3(0, 0, 0);
-    private Vector3 moverDirZ = new Vector3(0, 0, 0);
+    private Vector3 moveDirZ = new Vector3(0, 0, 0);
     private bool canMove = true;
     private Vector3 moveDir;
     [SerializeField] private GameInput gameInput;
@@ -39,6 +39,12 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     private void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
+        gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
+    }
+
+    private void GameInput_OnInteractAlternateAction(object sender, EventArgs e)
+    {
+        if (selectedCounter != null) selectedCounter.InteractAlternate(this);
     }
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
@@ -67,7 +73,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         if (!canMove)
         {
             moverDirX.x = moveDir.x;
-            canMove = !Physics.CapsuleCast(transform.position,
+            canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position,
             transform.position + Vector3.up * playerHeight, playerRadius,
             moverDirX, moveSpeed * Time.deltaTime);
             if (canMove)
@@ -76,13 +82,13 @@ public class Player : MonoBehaviour, IKitchenObjectParent
             }
             else
             {
-                moverDirZ.z = moveDir.z;
-                canMove = !Physics.CapsuleCast(transform.position,
+                moveDirZ.z = moveDir.z;
+                canMove = moveDirZ.z != 0 && !Physics.CapsuleCast(transform.position,
                     transform.position + Vector3.up * playerHeight, playerRadius,
-                    moverDirZ, moveSpeed * Time.deltaTime);
+                    moveDirZ, moveSpeed * Time.deltaTime);
                 if (canMove)
                 {
-                    moveDir = moverDirZ;
+                    moveDir = moveDirZ;
                 }
                 else
                 {
