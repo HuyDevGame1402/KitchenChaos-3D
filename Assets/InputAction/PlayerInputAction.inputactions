@@ -18,7 +18,7 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "c3b8177e-d96e-45e9-b54b-aac701bdf515",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -27,7 +27,7 @@
                     "name": "InteractAlternate",
                     "type": "Button",
                     "id": "fa21fc8d-b4d9-44f7-9b19-d01f59364ef7",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
