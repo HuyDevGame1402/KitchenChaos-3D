@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System;
+using Unity.Jobs;
 
 // implement interface cho player có thể cầm đồ vật phòng bếp
 public class Player : MonoBehaviour, IKitchenObjectParent
 {
     public static Player Instance { get; private set; }
-
+    public event EventHandler OnPickedSomething;
     private float moveSpeed = 7f;
     private float rotateSpeed = 30f;
     private float playerRadius = .7f;
@@ -183,6 +184,10 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     public void SetKitchenObject(KitChenObject kitchenObject)
     {
         this.kitchenObject = kitchenObject;
+        if (kitchenObject != null)
+        {
+            OnPickedSomething?.Invoke(this, EventArgs.Empty);
+        }
     }
     // lấy ra vp đang cầm
     public KitChenObject GetKitchenObject() => kitchenObject;
