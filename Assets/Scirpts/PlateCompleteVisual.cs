@@ -14,7 +14,11 @@ public class PlateCompleteVisual : MonoBehaviour
     [SerializeField] private List<KitchenObjectSO_GameObject> kitchenObjectSOGameObjectList;
     private void Start()
     {
-        plateKitchenObject.OnIngredientAdded += PlateKitchenObject_OnIngredientAdded;
+        Debug.LogWarning(gameObject.name);
+        if(plateKitchenObject != null)
+        {
+            plateKitchenObject.OnIngredientAdded += PlateKitchenObject_OnIngredientAdded;
+        }
         foreach (KitchenObjectSO_GameObject kitchenObjectSOGameObject in kitchenObjectSOGameObjectList)
         {
             kitchenObjectSOGameObject.gameObject.SetActive(false);
