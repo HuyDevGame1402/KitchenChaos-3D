@@ -4,7 +4,6 @@ public class DeliveryManagerUI : MonoBehaviour
 {
     [SerializeField] private Transform container;
     [SerializeField] private Transform recipeTemplate;
-    public string recipeNameObject = "RecipeNameText";
     private void Awake()
     {
         recipeTemplate.gameObject.SetActive(false);
@@ -37,7 +36,6 @@ public class DeliveryManagerUI : MonoBehaviour
         {
             Transform recipeTransform = Instantiate(recipeTemplate, container);
             recipeTransform.gameObject.SetActive(true);
-            //recipeTransform.Find(recipeNameObject);
             recipeTransform.GetComponent<DeliveryManagerSingleUI>().SetRecipeSO(recipeSO);
         }
     }
