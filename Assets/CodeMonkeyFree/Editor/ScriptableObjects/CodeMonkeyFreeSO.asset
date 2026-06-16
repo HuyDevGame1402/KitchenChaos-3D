@@ -14,39 +14,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.01
   subtype: kitchenchaos
-  lastShownTimestamp: 1781330149
+  lastShownTimestamp: 1781603052
   lastUpdateResponse:
     version: 1.01
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1781330149
+  checkedLastUpdateTimestamp: 1781603052
   lastQOTDResponse:
-    questionId: 311
-    questionText: Which namespace do we need to use File.WriteAllText()?
-    answerA: using System;
-    answerB: using UnityEngine;
-    answerC: using System.IO;
-    answerD: using UnityEngine.UI;
+    questionId: 312
+    questionText: How much time per frame do you have in order to hit 60FPS?
+    answerA: 60ms
+    answerB: 33ms
+    answerC: 16ms
+    answerD: 6ms
     answerE: 
-  lastQotdTimestamp: 1781330149
+  lastQotdTimestamp: 1781603052
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/humbleJun26Synty.png
     topText: Synty is BACK with a HumbleBundle 95% OFF! Don't miss this one!
     topLink: humblebundle
     bottomText: My 10+ Years of C# Knowledge in 1 Course!
     bottomLink: csharpcourse
-  lastDynamicHeaderTimestamp: 1781330149
+  lastDynamicHeaderTimestamp: 1781603052
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1781330149
+  websiteLatestMessageTimestamp: 1781603052
   websiteLatestVideos:
     videos:
+    - youTubeId: H36i5K3tTy8
+      title: TOP 10 NEW Games, Made with Unity! (MAY 2026)
     - youTubeId: NYBe2xkcscA
       title: Unity Summer Sale is live up to 90% OFF!
     - youTubeId: m0s3IUrWzVQ
       title: How to Write High Quality Code that doesn't fall apart.
     - youTubeId: NZfIxeK463o
       title: Steam update just DESTROYED indie devs?!
-    - youTubeId: AuT-paQSAHU
-      title: NEW HOTTEST Steam Game Genres Revealed!
-  websiteLatestVideosTimestamp: 1781330149
+  websiteLatestVideosTimestamp: 1781603052
