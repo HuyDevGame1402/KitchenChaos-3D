@@ -1,28 +1,38 @@
-using UnityEngine;
+﻿using UnityEngine;
 
+// quản lý sound âm thanh của game
 public class SoundManager : MonoBehaviour
 {
-
+    // biến string để lưu key của volum
     private const string PLAYER_PREFS_SOUND_EFFECTS_VOLUME = "SoundEffectsVolume";
 
     public static SoundManager Instance { get; private set; }
+    // 1 scriptable object lưu các mảng audico clip
     [SerializeField] private AudioClipRefsSO audioClipRefsSO;
-    private float volume = 1f;
+    private float volume = 1f; // mặc định volume = 1f
     private void Awake()
     {
         Instance = this;
+        // lấy ra volume mỗi lần mở game chạy nếu trc đã chỉnh là 0.3 thì lần sau cũng sẽ lấy đc 0.3f
         volume = PlayerPrefs.GetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, 1f);
     }
+    // đăng ký các event để gọi sound
     private void Start()
     {
+        // đăng ký nhận hàm khi gọi giao đồ ăn xong
         DeliveryManager.Instance.OnRecipeSuccess += DeliveryManager_OnRecipeSuccess;
+        // đk khi đồ ăn fail
         DeliveryManager.Instance.OnRecipeFailed += DeliveryManager_OnRecipeFailed;
+        // cắt đồ ăn
         CuttingCounter.OnAnyCut += CuttingCounter_OnAnyCut;
+        // cầm đồ vật
         Player.Instance.OnPickedSomething += Player_OnPickedSomething;
+        // đặt đồ
         BaseCounter.OnAnyObjectPlacedHere += BaseCounter_OnAnyObjectPlacedHere;
+        // bỏ đồ vào thùng rác
         TrashCounter.OnAnyObjectTrashed += TrashCounter_OnAnyObjectTrashed;
     }
-
+    // gọi sound tại vị trí counter và phát tương ứng sound đó random trong mảng array sound
     private void TrashCounter_OnAnyObjectTrashed(object sender, System.EventArgs e)
     {
         TrashCounter trashCounter = sender as TrashCounter;
@@ -81,13 +91,17 @@ public class SoundManager : MonoBehaviour
     {
         PlaySound(audioClipRefsSO.warning, position, volume);
     }
+    // thay đổi volume
     public void ChangeVolume()
     {
+        // cộng lên 0.1f
         volume += 0.1f;
+        // vượt qua ngưỡng max thì đặt lại về 0
         if(volume > 1f)
         {
             volume = 0f;
         }
+        // set và lưu vào trong PlayerPrefs
         PlayerPrefs.SetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, volume);
         PlayerPrefs.Save();
     }
